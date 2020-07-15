@@ -19,6 +19,7 @@
     "mime": "^2.4.6",
     "moment": "^2.26.0",
     "node-fetch": "^2.6.0",
+    "socket.io": "^2.3.0",
     "strapi": "3.0.1",
     "strapi-admin": "3.0.1",
     "strapi-connector-mongoose": "3.0.1",

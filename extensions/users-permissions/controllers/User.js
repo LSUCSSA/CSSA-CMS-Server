@@ -252,5 +252,6 @@ module.exports = {
     const contentTypeService = strapi.plugins['content-type-builder'].services.contenttypes;
     const userAttributes = contentTypeService.formatContentType(contentType).schema.attributes;
     ctx.send({position: userAttributes.position.enum, department: userAttributes.department.enum})
-  }
+  },
+
 };
