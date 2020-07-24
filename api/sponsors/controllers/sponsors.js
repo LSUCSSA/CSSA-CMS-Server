@@ -6,19 +6,11 @@
  */
 
 module.exports = {
-  async getSponsorComp(ctx){
-    let entities;
-    if (ctx.query._q) {
-      entities = await strapi.services.sponsors.search(ctx.query);
-    } else {
-      entities = await strapi.services.sponsors.find();
-      ctx.send(entities)
-    }
-  },
+
   async setSponsorComp(ctx){
     let entities;
     const data = ctx.request.body;
-    entities = await strapi.services.sponsors.createOrUpdate({sponsorsList: JSON.stringify(data)});
+    entities = await strapi.services.sponsors.createOrUpdate({id: ctx.state.user.id},{sponsorsList: JSON.stringify(data)});
     ctx.send(entities)
   }
 };

@@ -91,49 +91,14 @@
     "sex": {
       "type": "string"
     },
-    "hometown": {
-      "type": "string"
-    },
-    "school": {
-      "type": "string"
-    },
-    "degree": {
-      "type": "string"
-    },
-    "arriveAirport": {
-      "type": "string"
-    },
-    "arriveDateTime": {
-      "type": "datetime"
-    },
-    "luggage": {
-      "type": "string"
-    },
-    "friends": {
-      "type": "string"
-    },
-    "sleep": {
-      "type": "string"
-    },
-    "phone": {
-      "type": "string"
-    },
-    "social": {
-      "type": "string"
-    },
-    "toVolunteer": {
-      "type": "text"
-    },
-    "toCssa": {
-      "type": "text"
-    },
-    "joinMail": {
-      "type": "boolean"
-    },
     "role": {
       "plugin": "users-permissions",
       "model": "role",
       "via": "users"
+    },
+    "pickup_requests": {
+      "via": "user",
+      "collection": "pickup-requests"
     }
   }
 }

@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pickup_requests",
+  "info": {
+    "name": "pickupRequests"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "school": {
+      "type": "string"
+    },
+    "hometown": {
+      "type": "string"
+    },
+    "arriveDateTime": {
+      "type": "datetime"
+    },
+    "arriveAirport": {
+      "type": "string"
+    },
+    "luggage": {
+      "type": "integer",
+      "default": 0
+    },
+    "friends": {
+      "type": "integer",
+      "default": 0
+    },
+    "phone": {
+      "type": "string"
+    },
+    "social": {
+      "type": "text"
+    },
+    "toVolunteer": {
+      "type": "text"
+    },
+    "degree": {
+      "type": "string"
+    },
+    "tempPlace": {
+      "type": "boolean"
+    },
+    "joinMail": {
+      "type": "boolean"
+    },
+    "accepted": {
+      "type": "boolean"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "pickup_requests"
+    },
+    "status": {
+      "type": "text"
+    },
+    "toCssa": {
+      "type": "text"
+    },
+    "isCompleted": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

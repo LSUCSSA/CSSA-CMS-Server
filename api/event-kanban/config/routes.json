@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/event-kanban",
+      "handler": "event-kanban.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/event-kanban",
+      "handler": "event-kanban.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/event-kanban",
+      "handler": "event-kanban.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

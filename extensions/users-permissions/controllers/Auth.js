@@ -31,7 +31,7 @@ module.exports = {
 
     const role = await strapi
       .query('role', 'users-permissions')
-      .findOne({ type: "pickup_users" }, []);
+      .findOne({ type: "requester" }, []);
 
     if (!role) {
       return ctx.badRequest(
@@ -270,7 +270,7 @@ module.exports = {
 
     const role = await strapi
       .query('role', 'users-permissions')
-      .findOne({ type: "pickup_users" }, []);
+      .findOne({ type: "public" }, []);
 
     if (!role) {
       return ctx.badRequest(
@@ -329,8 +329,6 @@ module.exports = {
         params.confirmed = true;
       }
 
-      // set isVolunteer to false
-      params.isVolunteer = false;
 
       const user = await strapi.query('user', 'users-permissions').create(params);
 

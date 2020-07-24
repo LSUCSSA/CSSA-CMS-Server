@@ -1,0 +1,68 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/pickup-requests",
+      "handler": "pickup-requests.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/pickup-requests/count",
+      "handler": "pickup-requests.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/pickup-requests/:id",
+      "handler": "pickup-requests.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/pickup-requests",
+      "handler": "pickup-requests.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/pickup-requests/requestStatus",
+      "handler": "pickup-requests.requestStatus",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/pickup-requests/cancelRequest",
+      "handler": "pickup-requests.cancelRequest",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/pickup-requests/:id",
+      "handler": "pickup-requests.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/pickup-requests/:id",
+      "handler": "pickup-requests.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

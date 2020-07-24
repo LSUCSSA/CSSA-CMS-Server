@@ -2,8 +2,8 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/getSponsorComp",
-      "handler": "sponsors.getSponsorComp",
+      "path": "/sponsors",
+      "handler": "sponsors.find",
       "config": {
         "policies": []
       }
