@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notications",
+  "info": {
+    "name": "notications"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "avatar": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "title": {
+      "type": "string"
+    },
+    "datetime": {
+      "type": "datetime"
+    },
+    "type": {
+      "type": "string"
+    },
+    "read": {
+      "type": "boolean",
+      "default": false
+    },
+    "description": {
+      "type": "text"
+    },
+    "clickClose": {
+      "type": "boolean",
+      "default": true
+    },
+    "status": {
+      "type": "string"
+    },
+    "extra": {
+      "type": "string"
+    }
+  }
+}

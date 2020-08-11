@@ -11,7 +11,7 @@
     {
       "method": "PUT",
       "path": "/setSponsorComp",
-      "handler": "sponsors.setSponsorComp",
+      "handler": "sponsors.update",
       "config": {
         "policies": []
       }

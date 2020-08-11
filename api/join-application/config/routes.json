@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/join-applications",
+      "handler": "join-application.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/join-applications/count",
+      "handler": "join-application.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/join-applications/:id",
+      "handler": "join-application.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/join-applications",
+      "handler": "join-application.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/join-applications/:id",
+      "handler": "join-application.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/join-applications/:id",
+      "handler": "join-application.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

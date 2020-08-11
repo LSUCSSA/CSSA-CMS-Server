@@ -19,6 +19,8 @@
     "mime": "^2.4.6",
     "moment": "^2.26.0",
     "node-fetch": "^2.6.0",
+    "normalizr": "^3.6.0",
+    "shortid": "^2.2.15",
     "socket.io": "^2.3.0",
     "strapi": "3.0.1",
     "strapi-admin": "3.0.1",

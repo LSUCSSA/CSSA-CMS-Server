@@ -6,11 +6,10 @@
  */
 
 module.exports = {
-
-  async setSponsorComp(ctx){
+  async update(ctx){
     let entities;
     const data = ctx.request.body;
-    entities = await strapi.services.sponsors.createOrUpdate({id: ctx.state.user.id},{sponsorsList: JSON.stringify(data)});
+    entities = await strapi.services.sponsors.createOrUpdate({sponsorsList: JSON.stringify(data)});
     ctx.send(entities)
   }
 };

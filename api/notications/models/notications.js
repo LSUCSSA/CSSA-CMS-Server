@@ -5,10 +5,4 @@
  * to customize this model
  */
 
-module.exports = {
-  lifecycles :{
-    async afterUpdate(result){
-      strapi.cssaIO.emit('newKanbanData', JSON.stringify(result.kanbanData));
-    }
-  }
-};
+module.exports = {};

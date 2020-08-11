@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "join_applications",
+  "info": {
+    "name": "joinApplication"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "sex": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer"
+    },
+    "school": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string"
+    },
+    "studyYear": {
+      "type": "integer"
+    },
+    "contact": {
+      "type": "text"
+    },
+    "primaryInterest": {
+      "type": "string"
+    },
+    "secondaryInterest": {
+      "type": "string"
+    },
+    "reason4Join": {
+      "type": "text"
+    },
+    "hobby": {
+      "type": "string"
+    },
+    "experience": {
+      "type": "text"
+    },
+    "interviewDate": {
+      "type": "date"
+    },
+    "email": {
+      "type": "email",
+      "unique": true
+    }
+  }
+}
