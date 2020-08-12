@@ -8,7 +8,7 @@
 module.exports = {
   lifecycles :{
     async afterUpdate(result){
-      strapi.cssaIO.emit('newKanbanData', JSON.stringify(result.kanbanData));
+      strapi.cssaIO.broadcast.emit('newKanbanData', JSON.stringify(result.kanbanData));
     }
   }
 };
