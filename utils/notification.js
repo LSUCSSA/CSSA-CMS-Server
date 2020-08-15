@@ -1,9 +1,10 @@
 
 module.exports = {
-  async sendNotification(){
+  async sendNotification(data){
 
   },
-  async setNotification(){
-
+  async setNotification2DB(uid, data){
+      const notification = await strapi.query("notification").create(data);
+      this.sendNotification(notification);
   }
 };

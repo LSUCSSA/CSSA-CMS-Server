@@ -97,8 +97,16 @@
       "via": "users"
     },
     "pickup_requests": {
+      "collection": "pickup-requests",
+      "via": "user"
+    },
+    "notifications": {
+      "collection": "notications",
+      "via": "user"
+    },
+    "client_socket_id": {
       "via": "user",
-      "collection": "pickup-requests"
+      "model": "client-socket-id"
     }
   }
 }

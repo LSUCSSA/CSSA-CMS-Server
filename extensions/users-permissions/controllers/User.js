@@ -10,6 +10,8 @@ const _ = require('lodash');
 const {sanitizeEntity} = require('strapi-utils');
 const parse = require('csv-parse/lib/sync');
 const fs = require('fs');
+const notification = require('../../../utils/notification');
+const moment = require('moment');
 const toArray = require('stream-to-array');
 
 const sanitizeUser = user =>
@@ -252,6 +254,102 @@ module.exports = {
     const contentTypeService = strapi.plugins['content-type-builder'].services.contenttypes;
     const userAttributes = contentTypeService.formatContentType(contentType).schema.attributes;
     ctx.send({position: userAttributes.position.enum, department: userAttributes.department.enum})
+  },
+  /**
+   * Update a/an user record.
+   * @return {Object}
+   */
+  async update(ctx) {
+    const advancedConfigs = await strapi
+      .store({
+        environment: '',
+        type: 'plugin',
+        name: 'users-permissions',
+        key: 'advanced',
+      })
+      .get();
+
+    const { id } = ctx.params;
+    const { email, username, password } = ctx.request.body;
+
+    const user = await strapi.plugins['users-permissions'].services.user.fetch({
+      id,
+    });
+
+    if (_.has(ctx.request.body, 'email') && !email) {
+      return ctx.badRequest('email.notNull');
+    }
+
+    if (_.has(ctx.request.body, 'username') && !username) {
+      return ctx.badRequest('username.notNull');
+    }
+
+    if (_.has(ctx.request.body, 'password') && !password && user.provider === 'local') {
+      return ctx.badRequest('password.notNull');
+    }
+
+    if (_.has(ctx.request.body, 'username')) {
+      const userWithSameUsername = await strapi
+        .query('user', 'users-permissions')
+        .findOne({ username });
+
+      if (userWithSameUsername && userWithSameUsername.id != id) {
+        return ctx.badRequest(
+          null,
+          formatError({
+            id: 'Auth.form.error.username.taken',
+            message: 'username.alreadyTaken.',
+            field: ['username'],
+          })
+        );
+      }
+    }
+
+    if (_.has(ctx.request.body, 'email') && advancedConfigs.unique_email) {
+      const userWithSameEmail = await strapi.query('user', 'users-permissions').findOne({ email });
+
+      if (userWithSameEmail && userWithSameEmail.id != id) {
+        return ctx.badRequest(
+          null,
+          formatError({
+            id: 'Auth.form.error.email.taken',
+            message: 'Email already taken',
+            field: ['email'],
+          })
+        );
+      }
+    }
+
+    let updateData = {
+      ...ctx.request.body,
+    };
+
+    if (_.has(ctx.request.body, 'password') && password === user.password) {
+      delete updateData.password;
+    }
+
+    // check weather should promote
+    if(user.position === "member" && updateData.position !== "member"){
+      const translate = {
+        chair: '部长',
+        viceChair: '副部长',
+        member: '成员',
+        Presidents: '主席',
+        IT: '网络技术部',
+        Media: '新闻媒体部',
+        PR: '外联公关部',
+        EP: '活动策划部',
+        Treasure: '财务部',
+        Secretary: '秘书团',
+      };
+      const message = {title: `你已被提升为 ${translate[updateData.department]+translate[updateData.position]}!`};
+      const data = {user: id, type: "notification", datetime: moment().format("YYYY-MM-DD"), content: message};
+      await notification.setNotification2DB(data)
+    }
+
+    const data = await strapi.plugins['users-permissions'].services.user.edit({ id }, updateData);
+
+    ctx.send(sanitizeUser(data));
   },
 
 };

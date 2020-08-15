@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "client_socket_ids",
+  "info": {
+    "name": "clientSocketID"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "socketID": {
+      "type": "string",
+      "unique": true
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "client_socket_id"
+    }
+  }
+}

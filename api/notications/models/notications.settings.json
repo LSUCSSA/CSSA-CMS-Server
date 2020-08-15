@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "notications",
   "info": {
-    "name": "notications"
+    "name": "notification"
   },
   "options": {
     "increments": true,
@@ -45,6 +45,11 @@
     },
     "extra": {
       "type": "string"
+    },
+    "user": {
+      "via": "notifications",
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

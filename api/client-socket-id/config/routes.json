@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/client-socket-ids",
+      "handler": "client-socket-id.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/client-socket-ids/count",
+      "handler": "client-socket-id.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/client-socket-ids/:id",
+      "handler": "client-socket-id.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/client-socket-ids",
+      "handler": "client-socket-id.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/client-socket-ids/:id",
+      "handler": "client-socket-id.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/client-socket-ids/:id",
+      "handler": "client-socket-id.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
