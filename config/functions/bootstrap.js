@@ -13,7 +13,7 @@
 module.exports = async () => {
   await strapi.config.functions["wechatToken"]();
   await strapi.config.functions["fetchLatestNews"]();
-  setTimeout(()=>{
-    strapi.config.functions["websocket"]()
+  setTimeout(async()=>{
+    await strapi.config.functions["websocket"]()
   }, 3000)
 };
