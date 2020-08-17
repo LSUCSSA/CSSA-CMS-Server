@@ -21,7 +21,7 @@ module.exports = async() =>{
     }catch (e) {
       console.log(e.stack)
     }
-    strapi.cssaIO = socket;
+    strapi.cssaIO = cssaIO;
 
   });
   publicIO.on('connection', s => {

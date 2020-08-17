@@ -1,10 +1,15 @@
-
-module.exports = {
-  async sendNotification(data){
-
-  },
-  async setNotification2DB(uid, data){
-      const notification = await strapi.query("notification").create(data);
-      this.sendNotification(notification);
+const sendNotification = (socketID, data) =>{
+  strapi.cssaIO.to(socketID).emit("notifications", data)
+};
+const setNotification2DB= async (data) =>{
+  let notification = await strapi.query("notification").create(data);
+  delete notification['user'];
+  if ("client_socket_id" in data.user) {
+    const socketID = data.user.client_socket_id.socketID;
+    sendNotification(socketID, notification);
   }
+};
+module.exports = {
+  sendNotification,
+  setNotification2DB,
 };

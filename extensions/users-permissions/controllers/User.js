@@ -10,7 +10,7 @@ const _ = require('lodash');
 const {sanitizeEntity} = require('strapi-utils');
 const parse = require('csv-parse/lib/sync');
 const fs = require('fs');
-const notification = require('../../../utils/notification');
+const {setNotification2DB} = require('../../../utils/notification');
 const moment = require('moment');
 const toArray = require('stream-to-array');
 
@@ -342,9 +342,10 @@ module.exports = {
         Treasure: '财务部',
         Secretary: '秘书团',
       };
-      const message = {title: `你已被提升为 ${translate[updateData.department]+translate[updateData.position]}!`};
-      const data = {user: id, type: "notification", datetime: moment().format("YYYY-MM-DD"), content: message};
-      await notification.setNotification2DB(data)
+      const message = {title: `你已被提升为${translate[updateData.department]+translate[updateData.position]}!`};
+      const data = {user:sanitizeUser(user), type: "notification", datetime: moment(), ...message, read: false};
+
+      await setNotification2DB(data);
     }
 
     const data = await strapi.plugins['users-permissions'].services.user.edit({ id }, updateData);

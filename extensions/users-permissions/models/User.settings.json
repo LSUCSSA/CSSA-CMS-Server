@@ -100,13 +100,13 @@
       "collection": "pickup-requests",
       "via": "user"
     },
-    "notifications": {
-      "collection": "notications",
-      "via": "user"
-    },
     "client_socket_id": {
       "via": "user",
       "model": "client-socket-id"
+    },
+    "notifications": {
+      "via": "user",
+      "collection": "notification"
     }
   }
 }

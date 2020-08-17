@@ -1,6 +1,6 @@
 {
   "kind": "collectionType",
-  "collectionName": "notications",
+  "collectionName": "notifications",
   "info": {
     "name": "notification"
   },
@@ -47,9 +47,9 @@
       "type": "string"
     },
     "user": {
-      "via": "notifications",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "notifications"
     }
   }
 }
