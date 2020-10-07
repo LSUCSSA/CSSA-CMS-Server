@@ -62,6 +62,19 @@
           "name": "User"
         }
       }
+    },
+    {
+      "method": "POST",
+      "path": "/auth/local/wechatConnect",
+      "handler": "Auth.wechatConnect",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
     }
   ]
 }

@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * Read the documentation (https://strapi.io/documentation/3.0.0-beta.x/concepts/controllers.html#core-controllers)
+ * Read the documentation (https://strapi.io/documentation/v3.x/concepts/controllers.html#core-controllers)
  * to customize this controller
  */
-const axios = require("axios");
+const axios = require('axios');
 
 module.exports = {
   async imageProxy(ctx) {

@@ -1,5 +1,5 @@
 {
-  "connection": "default",
+  "kind": "singleType",
   "collectionName": "wechat_tokens",
   "info": {
     "name": "wechatToken"
@@ -10,22 +10,13 @@
   },
   "attributes": {
     "accessToken": {
-      "type": "string",
-      "private": true,
-      "required": true,
-      "unique": true,
-      "default": " "
-    },
-    "ExpireTime": {
-      "type": "integer",
-      "private": false,
-      "required": true
+      "type": "text"
     },
     "expireDateTime": {
-      "type": "datetime",
-      "private": true,
-      "required": true,
-      "unique": true
+      "type": "datetime"
+    },
+    "ExpireTime": {
+      "type": "biginteger"
     }
   }
 }

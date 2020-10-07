@@ -21,7 +21,7 @@
       "type": "email",
       "minLength": 6,
       "configurable": false,
-      "required": true
+      "required": false
     },
     "provider": {
       "type": "string",
@@ -88,9 +88,6 @@
       "plugin": "upload",
       "required": false
     },
-    "sex": {
-      "type": "string"
-    },
     "role": {
       "plugin": "users-permissions",
       "model": "role",
@@ -101,12 +98,25 @@
       "via": "user"
     },
     "client_socket_id": {
-      "via": "user",
-      "model": "client-socket-id"
+      "model": "client-socket-id",
+      "via": "user"
     },
     "notifications": {
-      "via": "user",
-      "collection": "notification"
+      "collection": "notification",
+      "via": "user"
+    },
+    "UnionId": {
+      "type": "string"
+    },
+    "session": {
+      "model": "session",
+      "via": "user"
+    },
+    "openid": {
+      "type": "string"
+    },
+    "sex": {
+      "type": "boolean"
     }
   }
 }

@@ -1,22 +1,24 @@
 {
   "kind": "collectionType",
-  "collectionName": "client_socket_ids",
+  "collectionName": "sessions",
   "info": {
-    "name": "clientSocketID"
+    "name": "session"
   },
   "options": {
     "increments": true,
     "timestamps": true
   },
   "attributes": {
-    "socketID": {
-      "type": "string",
-      "unique": false
-    },
     "user": {
-      "via": "client_socket_id",
+      "via": "session",
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "session_key": {
+      "type": "text"
+    },
+    "openid": {
+      "type": "string"
     }
   }
 }

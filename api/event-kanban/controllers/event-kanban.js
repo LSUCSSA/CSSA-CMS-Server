@@ -4,15 +4,16 @@
  * Read the documentation (https://strapi.io/documentation/v3.x/concepts/controllers.html#core-controllers)
  * to customize this controller
  */
-const shortid = require("shortid");
+
 const {normalize, schema} = require("normalizr");
+const { nanoid } = require('nanoid');
 
 module.exports = {
   async find(ctx) {
     const appendAttributes = list =>
       list.map(card => ({
         color: "white",
-        _id: shortid.generate(),
+        _id: nanoid(),
         ...card
       }));
     let boards;

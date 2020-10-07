@@ -7,11 +7,10 @@
  */
 
 /* eslint-disable no-useless-escape */
-const crypto = require('crypto');
 const _ = require('lodash');
-const grant = require('grant-koa');
 const { sanitizeEntity } = require('strapi-utils');
-
+const axios = require('axios');
+const { nanoid } = require('nanoid');
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const formatError = error => [
   { messages: [{ id: error.id, message: error.message, field: error.field }] },
@@ -112,7 +111,7 @@ module.exports = {
       }
 
       // Append role
-      query.role = role
+      query.role = role;
 
       if (
         _.get(await store.get({ key: 'advanced' }), 'email_confirmation') &&
@@ -410,5 +409,65 @@ module.exports = {
 
       ctx.badRequest(null, formatError(adminError));
     }
+  },
+  async wechatConnect(ctx){
+    const {code} = ctx.request.body;
+
+    const {data} = await axios.get(`https://api.weixin.qq.com/sns/jscode2session?appid=${process.env.miniProgramID}&secret=${process.env.miniProgramSecret}&js_code=${code}&grant_type=authorization_code`);
+    switch (data?.errcode){
+      case -1:
+        console.log('系统繁忙，此时请开发者稍候再试');
+        return ctx.badRequest(
+          null,
+          formatError({
+            id: 'Auth.wechat.busy',
+            message:
+              '系统繁忙，此时请开发者稍候再试',
+          })
+        );
+      case 40029:
+        console.log('code 无效');
+        return ctx.badRequest(
+          null,
+          formatError({
+            id: 'Auth.wechat.codeInvalid',
+            message:
+              'code 无效',
+          })
+        );
+      case 45011:
+        console.log('频率限制，每个用户每分钟100次');
+        return ctx.badRequest(
+          null,
+          formatError({
+            id: 'Auth.wechat.tooMuchRequest',
+            message:
+              '频率限制，每个用户每分钟100次',
+          })
+        );
+      default:
+        break;
+    }
+    if(data?.openid){
+      const unionid = data?.unionid ? {UnionId: data.unionid}: {};
+      // Check if user exist
+      let user = await strapi.query("user", 'users-permissions').findOne({openid: data.openid, ...unionid});
+      if (!user){
+
+        user = await strapi.query("user", 'users-permissions').create({username: nanoid(), role, openid: data.openid, ...unionid});
+        await strapi.query("session").create({user: user.id, session_key: data.session_key, openid: data.openid})
+      }else{
+        await strapi.query("session").update({user: user.id},{session_key: data.session_key, openid: data.openid});
+      }
+      const token = await strapi.plugins['users-permissions'].services.jwt.issue(
+        _.pick(user.toJSON ? user.toJSON() : user, ['id'])
+      );
+      ctx.send({
+        jwt: token,
+        user: sanitizeEntity(user.toJSON ? user.toJSON() : user, {
+          model: strapi.query('user', 'users-permissions').model,
+        })
+      })
+    }
   }
-}
+};
